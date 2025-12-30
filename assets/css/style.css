@@ -199,6 +199,13 @@ header.scrolled {
   filter: invert(1) brightness(1.1);
 }
 
+@media (max-width: 768px) {
+  .logo img {
+    height: 40px;
+  }
+}
+
+
 /* Theme Toggle with Animation */
 .theme-toggle {
   background: var(--bg-secondary);
@@ -252,11 +259,6 @@ header.scrolled {
   transition: transform 0.3s ease;
   position: relative;
   z-index: 1;
-}
-
-.theme-toggle:hover .sun-icon,
-.theme-toggle:hover .moon-icon {
-  transform: rotate(20deg) scale(1.1);
 }
 
 [data-theme="light"] .moon-icon {
@@ -319,6 +321,18 @@ header.scrolled {
   filter: invert(1) brightness(1.1);
 }
 
+@media (max-width: 768px) {
+    .hero-content img {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content img {
+        height: 120px;
+    }
+}
+
 .hero h1 {
   margin-bottom: 1rem;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
@@ -343,7 +357,7 @@ header.scrolled {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.3;
+  opacity: 0.1;
   overflow: hidden;
 }
 
@@ -357,7 +371,6 @@ header.scrolled {
   object-position: center;
   opacity: 0;
   transition: opacity 2s cubic-bezier(0.8, 0, 0.2, 1), transform 3s ease;
-  transform: scale(1.1);
 }
 
 .carousel-slide.active {
@@ -423,18 +436,26 @@ header.scrolled {
 }
 
 .plugin-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(75, 159, 255, 0.05), transparent);
-  transition: left 5s ease;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(75, 159, 255, 0.05), transparent);
+    transition: left 1.5s ease;
+    pointer-events: none;
 }
 
 .plugin-item:hover::before {
-  left: 100%;
+    left: 100%;
+    transition: left 1.5s ease;
+}
+
+/* Reset position without animation when hover ends */
+.plugin-item:not(:hover)::before {
+    transition: none;
+    left: -100%;
 }
 
 .plugin-item:nth-child(odd) {
