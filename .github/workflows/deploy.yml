@@ -1,0 +1,22 @@
+name: Deploy with Cache Busting
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Update cache busting
+        run: |
+          HASH=$(git rev-parse --short HEAD)
+          find . -name "*.html" -exec sed -i "s/style\.css?v=[^\"']*/style.css?v=$HASH/g" {} \;
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
