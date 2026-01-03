@@ -1,4 +1,25 @@
-// Krystal Dynamics - Enhanced Interactive JavaScript
+// Krystal Dynamics - JavaScript
+
+// Load header and footer
+async function loadComponent(id, url) {
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        document.getElementById(id).innerHTML = html;
+    } catch (error) {
+        console.error('Error loading component:', error);
+    }
+}
+
+// Load components on page load and initialize theme after header loads
+async function loadComponents() {
+    await loadComponent('header', '/assets/includes/header.html');
+    await loadComponent('footer', '/assets/includes/footer.html');
+    // Initialize theme AFTER header is loaded
+    initTheme();
+}
+
+loadComponents();
 
 // Theme Management with Smooth Transition
 function initTheme() {
@@ -54,7 +75,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Enhanced Carousel with Parallax
+// Carousel with Parallax
 function initCarousel() {
   const carouselContainer = document.getElementById('carouselContainer');
   
@@ -130,12 +151,6 @@ function initCarousel() {
       nextSlide();
     }
   });
-}
-
-// Smooth Scroll with Offset - DISABLED for smoother native scrolling
-function initSmoothScroll() {
-  // Smooth scroll disabled to improve performance
-  // Native browser scrolling is used instead
 }
 
 // Scroll Animations - SIMPLIFIED for better performance
@@ -362,14 +377,12 @@ window.addEventListener('scroll', debounce(() => {
 
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
   initCarousel();
-  initSmoothScroll();
   initScrollAnimations();
   initButtonEffects();
   initImageLoading();
   initDownloadTracking();
   initEasterEgg();
   
-  console.log('✨ Krystal Dynamics - Loaded');
+  console.log('Krystal Dynamics - Loaded');
 });
